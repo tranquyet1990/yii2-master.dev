@@ -25,12 +25,18 @@ return [
                 ],
             ],
         ],
+        'function' => [
+            'class' => 'backend\components\Functions',
+        ],
+        'auth' => [
+            'class' => 'backend\components\Auth',
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
             'loginUrl' => ['auth/login'],
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'backend\models\Admin',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
