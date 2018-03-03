@@ -11,8 +11,32 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    'language' => 'vi',
     'modules' => [],
     'components' => [
+        'i18n' => [
+            'translations' => [
+                'backend*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@backend/views/messages',
+                    'fileMap' => [
+                        'backend' => 'backend.php',
+                    ],
+                ],
+            ],
+        ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,
+                    'basePath' => '@webroot',
+                    'baseUrl' => '@web',
+                    'js' => [
+                        'vendors/js/jquery.min.js',
+                    ]
+                ],
+            ],
+        ],
         'assetManager' => [
             'bundles' => [
                 'yii\web\JqueryAsset' => [

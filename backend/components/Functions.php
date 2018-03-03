@@ -8,4 +8,5 @@ use yii\base\InvalidConfigException;
 
 class Functions extends Component {
 	
+	
 }

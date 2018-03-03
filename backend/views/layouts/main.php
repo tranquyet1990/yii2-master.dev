@@ -5,10 +5,9 @@
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use common\widgets\Alert;
+use backend\views\widgets\HeaderWidget;
+use backend\views\widgets\SidebarWidget;
+use backend\views\widgets\AsideWidget;
 
 AppAsset::register($this);
 ?>
@@ -23,57 +22,20 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
 <?php $this->beginBody() ?>
-
-<div class="wrap">
-
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/auth/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
-
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
+<?= HeaderWidget::widget() ?>
+<div class="app-body">
+    <?= SidebarWidget::widget() ?>
+    <!-- Main content -->
+    <main class="main">
+        <?= $content; ?>
+    </main>
+    <?= AsideWidget::widget() ?>
 </div>
-
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
+<footer class="app-footer">
+    <span><a href="tranquyet-developer.com">Trần Quyết</a> © 2018.</span>
+    <span class="ml-auto">Powered by <a href="tranquyet-developer.com">Trần Quyết</a></span>
 </footer>
 
 <?php $this->endBody() ?>
